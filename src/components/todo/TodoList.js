@@ -1,12 +1,18 @@
+import { useDispatch, useSelector } from "react-redux";
 import TodoItem from "./TodoItem";
+import { clearTodo } from "../../redux/actions/todoAction";
 
 const TodoList = () => {
-  const handleClearList = () => {};
+  const todoList = useSelector((state) => state.todo.todoList);
+  const dispatch = useDispatch();
+  const handleClearList = () => {
+    dispatch(clearTodo());
+  };
 
   return (
     <div>
       <div>
-        {[].map((todo) => (
+        {todoList.map((todo) => (
           <TodoItem key={todo.id} {...todo} />
         ))}
       </div>
