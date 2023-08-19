@@ -1,13 +1,22 @@
+import { ADD_TODO } from "../types/todoTypes";
+
 const initialState = {
-  todoList: [],
-}
+  todoList: [{ id: 1, text: "", completed: false }],
+};
 
-const todoReducer =  (state = initialState, { type, payload }) => {
-switch (type) {  case "first":
-  return { ...state, ...payload } 
-   default:
-  return state
-}
-}
+const todoReducer = (state = initialState, { type, payload }) => {
+  switch (type) {
+    case ADD_TODO:
+      return {
+        todoList: [
+          ...state.todoList,
+          { id: new Date().getTime(), text: payload, completed: false },
+        ],
+      };
 
-export default todoReducer
+    default:
+      return state;
+  }
+};
+
+export default todoReducer;
